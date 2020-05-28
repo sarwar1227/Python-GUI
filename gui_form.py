@@ -1,21 +1,33 @@
 from tkinter import *
+import tkinter.messagebox as tmsg
 root=Tk()
-root.geometry("664x444")
+root.geometry("400x250")
+root.maxsize(400,250)
+root.minsize(400,250)
 root.title("Sarwar Travels Portal")
-def sarwar(event):
-    if foodservicevalue.get() == 1:
-        food = "Yes"
-    else:
-        food = "No"
-    with open("record.txt","a") as f:
-        f.write(f"{namevalue.get()} {phonevalue.get()} {gendervalue.get()} {emergencyvalue.get()} {paymentmodevalue.get()} {food}\n")
+israr=StringVar()
+def reset_values(event):
     namevalue.set("")
     phonevalue.set("")
     gendervalue.set("")
     emergencyvalue.set("")
     paymentmodevalue.set("")
     foodservicevalue.set(0)
-    Label(root,text="You Ticket is Booked !!").grid(row=8,column=3)
+    israr.set("")
+def sarwar(event):
+    if foodservicevalue.get() == 1:
+        food = "Yes"
+    else:
+        food = "No"
+    ans=tmsg.askquestion("Confirm Booking","Do You Really Want to Book Your Ticket?")
+    israr.set("Your Ticket is Booked !!")
+    if ans=="yes":
+        with open("record.txt","a") as f:
+            f.write(f"{namevalue.get()} {phonevalue.get()} {gendervalue.get()} {emergencyvalue.get()} {paymentmodevalue.get()} {food}\n")
+            Label(root, textvariable=israr).grid(row=8, column=3)
+            button=Button(root,text="Book Again")
+            button.grid(row=8, column=4)
+            button.bind('<Button-1>',reset_values)
 Label(root,text="Welcome to sarwar travels",font="comicsansms 13 bold").grid(row=0,column=3)
 name=Label(root,text="Name")
 phone=Label(root,text="Phone")
