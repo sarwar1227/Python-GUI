@@ -1,11 +1,14 @@
 from tkinter import *
 import tkinter.messagebox as tmsg
 root=Tk()
-root.geometry("400x250")
-root.maxsize(400,250)
-root.minsize(400,250)
+root.geometry("420x400")
+root.maxsize(420,400)
+root.minsize(420,400)
 root.title("Sarwar Travels Portal")
 israr=StringVar()
+slider = Scale(root, from_=1, to=5, orient=HORIZONTAL, tickinterval=1)
+def rate():
+    tmsg.showinfo("Rating Popup",f"Thanks For Giving Us {slider.get()} star rating")
 def reset_values(event):
     namevalue.set("")
     phonevalue.set("")
@@ -30,6 +33,9 @@ def sarwar(event):
                 button=Button(root,text="Book Again")
                 button.grid(row=9,column=3)
                 button.bind('<Button-1>',reset_values)
+                Label(root, text="Please Rate Our App").grid(row=13,column=3)
+                slider.grid(row=12,column=3)
+                Button(root, text="Rate",command=rate).grid(row=14,column=3)
 Label(root,text="Welcome to sarwar travels",bg="pink",fg="black",font="comicsansms 15 bold",).grid(row=0,column=3)
 name=Label(root,text="Name",fg="black",bg="white")
 phone=Label(root,text="Phone",fg="black",bg="white")
