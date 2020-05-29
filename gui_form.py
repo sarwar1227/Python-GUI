@@ -12,7 +12,7 @@ def rate():
 def reset_values(event):
     namevalue.set("")
     phonevalue.set("")
-    gendervalue.set("")
+    gendervalue.set(0)
     emergencyvalue.set("")
     paymentmodevalue.set("")
     foodservicevalue.set(0)
